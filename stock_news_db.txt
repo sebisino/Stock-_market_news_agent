@@ -1,0 +1,35 @@
+CREATE TABLE news_table
+(
+    new_id INTEGER PRIMARY KEY,
+    url TEXT UNIQUE,
+    title TEXT,
+    source TEXT,
+    published_at TEXT,
+    collected_at TEXT,
+    article_text TEXT,
+    extraction_status TEXT
+);
+
+CREATE TABLE article_analysis
+(
+    analysis_id INTEGER PRIMARY KEY,
+    new_id INTEGER NOT NULL,
+    model TEXT NOT NULL,
+    analysis TEXT,
+    created_at TEXT,
+    validation TEXT,
+    FOREIGN KEY (new_id) REFERENCES news_table(new_id)
+);
+
+CREATE TABLE final_summaries
+(
+    summary_id INTEGER PRIMARY KEY,
+    new_id INTEGER NOT NULL UNIQUE,
+    summary TEXT NOT NULL,
+    created_at TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'unsent',
+    FOREIGN KEY (new_id) REFERENCES news_table(new_id)
+);
+
+CREATE UNIQUE INDEX idx_article_analysis_new_model
+ON article_analysis(new_id, model);
