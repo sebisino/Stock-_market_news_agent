@@ -1,12 +1,12 @@
 import sqlite3
 import json
 from datetime import datetime, timezone
-
+from pathlib import Path
 from llm_clients import create_final_summary
 from analysis_utils import parse_llm_json, check_answer_summary
 
-
-DB_PATH = "/Users/jansebesta/DataGripProjects/stock_market_news/stock_news.sqlite"
+BASE_DIR = Path(__file__).resolve().parent
+DB_PATH = BASE_DIR / "stock_news.sqlite"
 
 
 def get_ready_articles():

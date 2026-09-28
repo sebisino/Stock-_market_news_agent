@@ -2,7 +2,7 @@ import sqlite3
 import json
 
 from datetime import datetime, timezone
-
+from pathlib import Path
 from llm_clients import (
     analyze_with_groq,
     analyze_with_gemini,
@@ -11,8 +11,8 @@ from llm_clients import (
 
 from analysis_utils import parse_llm_json, check_answer
 
-
-DB_PATH = "/Users/jansebesta/DataGripProjects/stock_market_news/stock_news.sqlite"
+BASE_DIR = Path(__file__).resolve().parent
+DB_PATH = BASE_DIR / "stock_news.sqlite"
 
 
 def analyze_with_retry(analyze_function, article_text, max_retries=2):

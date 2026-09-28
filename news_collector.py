@@ -3,15 +3,15 @@ import time
 import sqlite3
 import requests
 import trafilatura
-
+from pathlib import Path
 from getpass import getpass
 from urllib.parse import urlencode
 from urllib.request import urlopen
 from datetime import datetime, timezone, timedelta
 from zoneinfo import ZoneInfo
 
-
-DB_PATH = "/Users/jansebesta/DataGripProjects/stock_market_news/stock_news.sqlite"
+BASE_DIR = Path(__file__).resolve().parent
+DB_PATH = BASE_DIR / "stock_news.sqlite"
 
 
 # --------------------------------------------------
